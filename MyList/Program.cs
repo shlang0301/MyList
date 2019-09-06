@@ -127,6 +127,34 @@ namespace MyList
 
         }
 
+        public void RemoveAt(int positionObj)
+        {
+            positionObj--;
+
+            Obj[] array2 = new Obj[sizeArray - 2];
+
+            for (int i = 0; i < positionObj; i++)
+            {
+                array2[i] = array[i];
+            }
+
+            for (int i = positionObj; i < sizeArray - 2; i++)
+            {
+                array2[i] = array[i + 1];
+            }
+
+            array = array2;
+
+            sizeArray--;
+        }
+
+        public void Clear ()
+        {
+            Obj[] array2 = new Obj[1];
+            array = array2;
+            sizeArray=1;
+        }
+
         public void ShowArray()
         {
             for (int i = 0; i < sizeArray - 1; i++)
@@ -158,18 +186,22 @@ namespace MyList
             List.Add(two);
 
 
+            List.Clear();
+
+
             Obj three = new Obj();
 
             three.set(30);
 
             List.Add(three);
+            
 
 
             Obj fourth = new Obj();
 
             fourth.set(89);
 
-            List.Insert(2, fourth);
+            List.Insert(1, fourth);
 
 
 
@@ -181,18 +213,18 @@ namespace MyList
 
 
 
-            List.Remove(one);
+            //List.Remove(one);
 
-            List.Remove(five);
+            //List.Remove(five);
 
-            List.Remove(three);
+            //List.Remove(three);
 
-            List.Remove(two);
-
-            List.Remove(fourth);
+            //List.Remove(two);           
 
            
-            List.Add(three);
+            //List.Add(three);
+
+            //List.RemoveAt(2);
 
 
             List.ShowArray();

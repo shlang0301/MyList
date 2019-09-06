@@ -10,12 +10,7 @@ namespace MyList
     {
         private int a;
         private string str;
-        public static int capacity;
-
-        //public Obj()
-        //{
-        //    capacity++;
-        //}
+               
 
         public int getA()
         {
@@ -32,7 +27,6 @@ namespace MyList
             a = A;
             str = Str;
         }
-
     }
 
 
@@ -41,58 +35,96 @@ namespace MyList
         public static int sizeArray = 1;
 
         public static int position = 0;
+        
 
         public Obj[] array = new Obj[sizeArray];
 
         public void Add(Obj a)
         {
-            capacity++;
-            if (sizeArray == capacity)
+            
+            if (sizeArray == 1)
             {
-                array[position] = a;
-
-                position++;
+                array[sizeArray-1] = a;               
+                sizeArray++;
             }
 
-            else if (sizeArray < capacity)
+            else if (sizeArray > 1)
             {
-                Obj[] array2 = new Obj[capacity];
-                for (int i = 0; i < sizeArray; i++)
+                Obj[] array2 = new Obj[sizeArray];
+                for (int i = 0; i < sizeArray-1; i++)
                 {
                     array2[i] = array[i];
                 }
                 array = array2;
-                array[position] = a;
-                position++;
-                sizeArray = capacity;
+                array[sizeArray - 1] = a;              
+                sizeArray++;
             }
         }
 
         public void Insert(int Num, Obj a)
         {
-            capacity++;
-            if (Num < 1 || Num > sizeArray)
+           
+            if (Num < 1 || Num > sizeArray-1)
             {
                 Console.WriteLine("Error! Insert failed!");
                 return;
             }
             else
             {
-                Obj[] array2 = new Obj[capacity];
+                Obj[] array2 = new Obj[sizeArray];
                 for (int i = 0; i < Num - 1; i++)
                 {
                     array2[i] = array[i];
                 }
 
-                for (int i = Num; i < capacity - 1; i++)
+                for (int i = Num; i < sizeArray; i++)
                 {
                     array2[i] = array[i - 1];
                 }
 
                 array = array2;
                 array[Num - 1] = a;
-                sizeArray = capacity;
+                sizeArray++;
             }
+        }
+
+        public void Remove(Obj a)
+        {
+            int positionObj = -1;
+
+            for (int i = 0; i < sizeArray-1; i++)
+            {
+                if (array[i] == a)
+                {
+                    positionObj = i;
+                }
+               
+            } 
+            
+            if (positionObj != -1)
+            {
+                Obj[] array2 = new Obj[sizeArray - 2];
+
+                for (int i = 0; i < positionObj; i++)
+                {
+                    array2[i] = array[i];
+                }
+
+                for (int i = positionObj; i < sizeArray - 2; i++)
+                {
+                    array2[i] = array[i + 1];
+                }
+
+                array = array2;
+
+                sizeArray--;
+                
+            }
+            else
+            {
+                Console.WriteLine("Obj is not find in this array!");
+            }           
+
         }
 
         public void ShowArray()
@@ -139,11 +171,29 @@ namespace MyList
 
             List.Insert(2, fourth);
 
+
+
             Obj five = new Obj();
 
             five.set(289);
 
             List.Insert(1, five);
+
+
+
+            List.Remove(one);
+
+            List.Remove(five);
+
+            List.Remove(three);
+
+            List.Remove(two);
+
+            List.Remove(fourth);
+
+           
+            List.Add(three);
+
 
             List.ShowArray();
 
